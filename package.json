@@ -1,0 +1,22 @@
+{
+  "name": "proyectos-innovacion-uploader",
+  "version": "1.0.0",
+  "description": "projects parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InDevelopmentCompany/proyectos-innovacion-uploader.git"
+  },
+  "author": "baesparza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/InDevelopmentCompany/proyectos-innovacion-uploader/issues"
+  },
+  "homepage": "https://github.com/InDevelopmentCompany/proyectos-innovacion-uploader#readme",
+  "devDependencies": {
+    "@types/node": "^10.12.7"
+  }
+}
