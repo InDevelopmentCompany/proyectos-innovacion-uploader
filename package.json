@@ -18,5 +18,8 @@
   "homepage": "https://github.com/InDevelopmentCompany/proyectos-innovacion-uploader#readme",
   "devDependencies": {
     "@types/node": "^10.12.7"
+  },
+  "dependencies": {
+    "firebase": "^4.12.1"
   }
 }

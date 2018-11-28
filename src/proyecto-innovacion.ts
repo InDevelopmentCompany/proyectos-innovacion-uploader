@@ -49,8 +49,5 @@ export class ProyectoInnovacion {
             };
             this.participants.push(participant);
         }
-
-        console.log(this);
-
     }
 }
