@@ -14,7 +14,6 @@ import { ProyectoInnovacion } from "./proyecto-innovacion";
             // parse objects
             const p: ProyectoInnovacion = new ProyectoInnovacion(data);
             // console.log(p);
-            break;
         }
     });
 

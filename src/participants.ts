@@ -1,5 +1,7 @@
-export interface Participants {
-    name: string,
-    department: string,
-    subject: string,
+export interface Participant {
+    name: string, // nombre
+    department: string, // carrera
+    subject: string, // carrera
+    mail: string, // carrera
+    
 }
