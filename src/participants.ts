@@ -1,7 +1,7 @@
 export interface Participant {
-    name: string, // nombre
-    department: string, // carrera
-    subject: string, // carrera
-    email: string, // carrera
-    
+  name: string; // nombre
+  department: string; // carrera
+  subject: string; // carrera
+  email: string; // carrera
+  modality: string;
 }
