@@ -62,5 +62,4 @@ typings/
 .next
 
 # folders to ignore
-assets
 dist
