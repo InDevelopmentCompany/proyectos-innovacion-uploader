@@ -9,7 +9,7 @@ var ProyectoInnovacion = /** @class */ (function () {
         this.participants = []; // participantes
         this.strategicLine = null; // linea estrategica
         this.type = null; // tipo de propuesta
-        this.period = []; // periodo
+        this.periods = []; // periodo
         this.subject = null; // asignatura
         // other data
         this.img = null;
@@ -22,31 +22,102 @@ var ProyectoInnovacion = /** @class */ (function () {
             sociohumanistica: false,
             tecnica: false
         };
-        console.log(rawData);
         // get params
         var d = rawData.split(';');
         this.name = d[1] !== '' ? d[1].trim() : null;
-        this.coordinator = d[4] !== '' ? d[4].trim() : null;
-        this.modality = d[6] !== '' ? d[6].trim() : null;
-        this.strategicLine = d[29] !== '' ? d[29].trim() : null;
-        this.type = d[30].includes('Buena') ? 'buena-practica' : 'proyecto-actual';
-        this.subject = d[33] !== '' ? d[33].trim() : null;
-        this.period.push(d[31].trim());
-        if (d[32] !== '')
-            this.period.push(d[32].trim());
+        this.area = {
+            administrativa: false,
+            biologica: false,
+            sociohumanistica: false,
+            tecnica: false
+        };
+        if (d[30].toLowerCase().includes('uma') ||
+            d[35].toLowerCase().includes('uma') ||
+            d[40].toLowerCase().includes('uma') ||
+            d[45].toLowerCase().includes('uma') ||
+            d[50].toLowerCase().includes('uma')) {
+            this.area.sociohumanistica = true;
+        }
+        if (d[30].toLowerCase().includes('iol') ||
+            d[35].toLowerCase().includes('iol') ||
+            d[40].toLowerCase().includes('iol') ||
+            d[45].toLowerCase().includes('iol') ||
+            d[50].toLowerCase().includes('iol')) {
+            this.area.biologica = true;
+        }
+        if (d[30].toLowerCase().includes('cnica') ||
+            d[35].toLowerCase().includes('cnica') ||
+            d[40].toLowerCase().includes('cnica') ||
+            d[45].toLowerCase().includes('cnica') ||
+            d[50].toLowerCase().includes('cnica')) {
+            this.area.tecnica = true;
+        }
+        if (d[30].toLowerCase().includes('trativa') ||
+            d[35].toLowerCase().includes('trativa') ||
+            d[40].toLowerCase().includes('trativa') ||
+            d[45].toLowerCase().includes('trativa') ||
+            d[50].toLowerCase().includes('trativa')) {
+            this.area.administrativa = true;
+        }
         // participants
-        var i = 8;
-        var limit = 28;
+        var i = 3;
+        var limit = 22;
+        // 6 cedula
+        // 7 nombres y apellidos
+        // 8 correo
+        // 25 departamento
+        // 10 seccion
+        // 11 asignatura
+        // 12 titulacion
+        // 13 modalidad
         while (d[i] !== '' && i < limit) {
             var participant = {
                 name: d[i] !== '' ? d[i].trim() : null,
                 email: d[i + 1] !== '' ? d[i + 1].trim() : null,
                 department: d[i + 2] !== '' ? d[i + 2].trim() : null,
-                subject: d[i + 3] !== '' ? d[i + 3].trim() : null
+                subject: d[i + 3] !== '' ? d[i + 3].trim() : null,
+                modality: null //d[i + 7] !== '' ? d[i + 7].trim() : null
             };
             i += 4;
             this.participants.push(participant);
         }
+        this.coordinator = d[23] !== '' ? d[23].trim() : null;
+        this.strategicLine =
+            d[24] !== ''
+                ? d[24]
+                    .trim()
+                    .replace('"', '')
+                    .split('\t')
+                    .join(' ')
+                : null;
+        this.type = null;
+        if (d[25].includes('Buena')) {
+            this.type = 'buena-practica';
+        }
+        else if (d[25].includes('Coordinados')) {
+            this.type = 'proyecto-coordinado';
+        }
+        else {
+            this.type = 'proyecto-actual';
+        }
+        this.subject = d[28] !== '' ? d[28].trim() : null;
+        this.periods.push({
+            name: d[26]
+                .trim()
+                .split(' ')
+                .join('')
+                .split('-')
+                .join(' - ')
+        });
+        if (!!d[27] && d[27].trim() !== '')
+            this.periods.push({
+                name: d[27]
+                    .trim()
+                    .split(' ')
+                    .join('')
+                    .split('-')
+                    .join(' - ')
+            });
     }
     return ProyectoInnovacion;
 }());
