@@ -17,9 +17,7 @@ firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
 var db = firebase.firestore();
 let proyectosCollection = db
-  .collection('innovacion-docente')
-  .doc('proyectos-innovacion')
-  .collection('proyectos');
+  .collection('innovacion-docente/proyectos-innovacion/proyectos');
 
 // read cli config
 // read file
@@ -33,8 +31,8 @@ fs.readFile('./assets/base.csv', 'utf8', (err, contents) => {
     // store in firestore
     let date = new Date();
 
-    console.log(p);
-
+    // console.log(p);
+    continue;
     proyectosCollection
       .add({
         ...p,
@@ -42,10 +40,10 @@ fs.readFile('./assets/base.csv', 'utf8', (err, contents) => {
         edited: date,
         newProject2: true
       })
-      .then(function(docRef) {
+      .then(function (docRef) {
         console.log('Document written with ID: ', docRef.id);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error('Error adding document: ', error);
       });
   }
